@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<!--
+	Landed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>{{ $.Title }}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		{{ `<!--[if lte IE 8]><script src="/js/ie/html5shiv.js"></script><![endif]-->` | safeHTML }}
+		<link rel="stylesheet" href="{{ .Site.BaseURL }}css/main.css" />
+		{{ `<!--[if lte IE 9]><link rel="stylesheet" href="/css/ie9.css" /><![endif]-->` | safeHTML }}
+		{{ `<!--[if lte IE 8]><link rel="stylesheet" href="/css/ie8.css" /><![endif]-->` | safeHTML }}
+	</head>
+	<body class="landing">
+		<div id="page-wrapper">
+			<!-- Standard nav -->
+			{{ partial "header/header" $ }}
+
+
+			<!-- Banner -->
+				<section id="banner" {{ with $.Site.Params.bannerimage }}style="background-image: url({{ $.Site.BaseURL }}{{ . | safeHTML }}"{{end}}>
+					<div class="content">
+						<span class="image"><img src="{{ with $.Site.Params.image}}{{ . }}{{else}}{{ "https://via.placeholder.com/288x288" | safeHTML }}{{end}}" alt="" /></span>
+						{{ if or ( isset $.Site.Params "description" ) ( isset $.Site.Params "strapline" ) }}
+							<header>
+								{{ with $.Site.Params.description}}<h2>{{ . }}</h2>{{end}}
+								{{ with $.Site.Params.strapline}}<p>{{ . | safeHTML }}{{end}}</p>
+							</header>
+						{{ end }}
+					</div>
+					<a href="#section1" class="goto-next scrolly">Next</a>
+				</section>
+			{{ $section := $.Site.Params.indexitemsection | default "section" }}
+			{{ $.Scratch.Set "id" 1 }}
+			{{ range where (where $.Site.Pages "Section" $section) "IsPage" true }}
+				{{ $classes := .Params.class | default "spotlight style1 bottom" }}
+				<section id="section{{ $.Scratch.Get "id" }}" class="{{$classes}}">
+					{{ if isset .Params "image" }}
+						<span class="image fit main"><img src="{{ .Params.image }}" alt="" /></span>
+					{{ end }}
+					<div class="content">
+						{{ .Content }}
+					</div>
+					{{ $.Scratch.Add "id" 1 }}
+					<a href="#section{{ $.Scratch.Get "id" }}" class="goto-next scrolly">Next</a>
+				</section>
+			{{ end }}
+
+
+			<!-- Footer -->
+				<footer id="footer">
+					{{ partial "footer/footer" $ }}
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{ .Site.BaseURL }}js/jquery.min.js"></script>
+			<script src="{{ .Site.BaseURL }}js/jquery.scrolly.min.js"></script>
+			<script src="{{ .Site.BaseURL }}js/jquery.dropotron.min.js"></script>
+			<script src="{{ .Site.BaseURL }}js/jquery.scrollex.min.js"></script>
+			<script src="{{ .Site.BaseURL }}js/skel.min.js"></script>
+			<script src="{{ .Site.BaseURL }}js/util.js"></script>
+			{{ `<!--[if lte IE 8]><script src="/js/ie/respond.min.js"></script><![endif]-->` | safeHTML }}
+			<script src="{{ .Site.BaseURL }}js/main.js"></script>
+
+	</body>
+</html>

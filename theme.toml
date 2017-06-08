@@ -1,0 +1,15 @@
+name = "HTML5Up Landed"
+license = "TBC"
+description = "Theme inspired by https://html5up.net/landed"
+homepage = "https://github.com/VibroAxe/hugo-theme-html5up-landed"
+tags = ["landing page", "html5up"]
+features = [ ]
+min_version= 0.21
+
+[author]
+     name = "VibroAxe"
+
+[original]
+    author =  "ajlkn"
+    homepage = "https://html5up.net"
+
