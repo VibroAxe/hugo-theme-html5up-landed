@@ -42,9 +42,12 @@
 					{{ if isset .Params "image" }}
 						{{with .Params.image}}	<span class="image fit main"><img src="{{$.Site.BaseURL}}{{ .| safeHTML }}" alt="" /></span>{{end}}
 					{{ end }}
+					{{if eq .Content ""}}
+					{{else}}
 					<div class="content">
 						{{ .Content }}
 					</div>
+					{{end}}
 					{{ $.Scratch.Add "id" 1 }}
 					<a href="#section{{ $.Scratch.Get "id" }}" class="goto-next scrolly">Next</a>
 				</section>
