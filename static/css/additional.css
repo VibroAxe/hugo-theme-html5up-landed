@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,300,100italic,300italic");
+
+body.landing #header {
+	position: fixed;
+	top: 0;
+	background-color: rgba(0,0,0,.9);
+	background: linear-gradient(to bottom, rgba(0,0,0,.9) 95%, rgba(0,0,0,0));
+}
+
+img.headerlogo {
+    height: inherit;
+	left: 1.25em;
+	line-height: inherit;
+	margin: 0.5em 0;
+	position: absolute;
+	top: 0;
+	
+	height: 2.5em;
+}
+
+.wrapper.style2 {
+	    background: #5480f1;
+}
+
+body, input, select, textarea {
+	font-family: "Montserrat", sans-serif;
+}
