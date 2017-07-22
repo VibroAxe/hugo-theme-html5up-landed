@@ -2,6 +2,10 @@
 					<a href="{{$.Site.BaseURL}}">
 						{{ if isset $.Site.Params "headerlogoimg" }}
 							<img src="{{$.Site.BaseURL}}/{{$.Site.Params.headerlogoimg}}" alt="{{$.Site.Title}}" class="headerlogo"/>
+							<h1 id="logo" style="display:none">
+								{{ $.Site.Title }}
+							</h1>
+							
 						{{ else }}
 							<h1 id="logo">
 								{{ $.Site.Title }}
@@ -10,7 +14,12 @@
 					</a>
 					<nav id="nav">
 						<ul>
-							<li><a href="{{$.Site.BaseURL}}">Home</a></li>
+							{{if eq .URL "/"}}
+								<li class="active">
+							{{else}}
+								<li>
+							{{end}}
+							<a href="{{$.Site.BaseURL}}">Home</a></li>
 							{{ partial "header/menu" (dict "menu" $.Site.Menus.main "page" . "site" .Site ) }}
 							{{ partial "header/menu.additional" . }}
 						</ul>
