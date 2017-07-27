@@ -4,6 +4,26 @@
 
 {{ define "main" }}
 	<div id="main" class="wrapper style1">
-		{{ .Content }}
+		{{ $raw := .Params.raw | default false }}
+		{{ if $raw }}
+			{{ .Content }}
+
+		{{ else }}
+			<div class="container">
+				<header class="major">
+					<h2>{{ .Title }}</h2>
+					{{if isset .Params "subtitle" }}
+					<p>{{.Params.subtitle}}</p>
+					{{end}}
+				</header>
+				 <!-- Content -->
+				 <section id="content">
+					 {{if isset .Params "image" }}
+					 <a href="#" class="image fit"><img src="{{ $.Site.BaseURL }}{{ .Params.image }}" alt="{{ .Title }}"></a>
+					 {{ end }}
+					{{ .Content }}
+				</section>
+			</div>
+		{{ end }}
 	</div>
 {{ end }}
