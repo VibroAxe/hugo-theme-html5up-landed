@@ -24,7 +24,7 @@
 			<!-- Banner -->
 				<section id="banner" {{ with $.Site.Params.bannerimage }}style="background-image: url({{ $.Site.BaseURL }}{{ . | safeHTML }}"{{end}}>
 					<div class="content">
-						<span class="image"><img src="{{ with $.Site.Params.image}}{{ . }}{{else}}{{ "https://via.placeholder.com/288x288" | safeHTML }}{{end}}" alt="" /></span>
+						<span class="image"><img src="{{ with $.Site.Params.image}}{{$.Site.BaseURL}}{{ . }}{{else}}{{ "https://via.placeholder.com/288x288" | safeHTML }}{{end}}" alt="" /></span>
 						{{ if or ( isset $.Site.Params "description" ) ( isset $.Site.Params "strapline" ) }}
 							<header>
 								{{ with $.Site.Params.description}}<h2>{{ . }}</h2>{{end}}
