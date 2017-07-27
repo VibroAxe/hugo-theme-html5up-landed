@@ -44,9 +44,22 @@
 					{{ end }}
 					{{if eq .Content ""}}
 					{{else}}
-					<div class="content">
-						{{ .Content }}
-					</div>
+						<div class="content">
+						{{ $raw := .Params.raw | default false }}
+						{{ if $raw }}
+							{{ .Content }}
+
+						{{ else }}
+							<header>
+								<h2>{{ .Title }}</h2>
+								{{if isset .Params "subtitle" }}
+									<p>{{.Params.subtitle}}</p>
+								{{end}}
+							</header>
+				 			<!-- Content -->
+							{{ .Content }}
+						{{end}}
+						</div>
 					{{end}}
 					{{ $.Scratch.Add "id" 1 }}
 					<a href="#section{{ $.Scratch.Get "id" }}" class="goto-next scrolly">Next</a>
