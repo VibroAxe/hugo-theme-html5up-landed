@@ -3,7 +3,17 @@
 {{ end }}
 
 {{ define "main" }}
-	<div id="main" class="wrapper style1">
+	{{ $classes := .Params.class | default "wrapper style1" }}
+	<div id="main" class="{{ $classes }}"
+				{{if isset .Params "image"}}
+				style="
+					background-image: -webkit-linear-gradient(top, rgba(23, 24, 32, 0.7), rgba(23, 24, 32, 0.7)), url('{{$.Site.BaseURL}}{{.Params.image}}');
+		    		background-size: cover;
+			    	background-repeat: no-repeat;
+				    background-attachment: fixed;
+					"
+				{{end}}
+		>
 		{{ $raw := .Params.raw | default false }}
 		{{ if $raw }}
 			{{ .Content }}
@@ -19,7 +29,7 @@
 				 <!-- Content -->
 				 <section id="content">
 					 {{if isset .Params "image" }}
-					 <a href="#" class="image fit"><img src="{{ $.Site.BaseURL }}{{ .Params.image }}" alt="{{ .Title }}"></a>
+					 <!--<a href="#" class="image fit"><img src="{{ $.Site.BaseURL }}{{ .Params.image }}" alt="{{ .Title }}"></a>-->
 					 {{ end }}
 					{{ .Content }}
 				</section>
