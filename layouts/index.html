@@ -84,6 +84,7 @@
 			<script src="{{ .Site.BaseURL }}js/util.js"></script>
 			{{ `<!--[if lte IE 8]><script src="/js/ie/respond.min.js"></script><![endif]-->` | safeHTML }}
 			<script src="{{ .Site.BaseURL }}js/main.js"></script>
+		{{ template "_internal/google_analytics_async.html" . }}
 
 	</body>
 </html>
