@@ -18,7 +18,7 @@
 			</section>
 			<section id="list">
 				<div class="row center 50% uniform">
-					{{ range where .Data.Pages "Params.archived" "!=" true}}
+					{{ range $index, $element := where .Data.Pages "Params.archived" "!=" true}}
 					<div class="4u 4u(medium) 12u$(xsmall)">
 						<a href="{{.Permalink}}">
 							<span class="image fit">
@@ -37,7 +37,7 @@
 						{{else}}
 						<a href="{{.Permalink}}" class="button">
 						{{end}}
-						{{.Title}} {{.Params.archived}}
+						{{.Title}}
 						</a>
 					</div>
 					{{ end }}
@@ -54,7 +54,7 @@
 					{{end}}
 				</header>
 				<div class="row center 50% uniform">
-					{{ range $archiveposts}}
+					{{ range $index, $element := $archiveposts}}
 					<div class="4u 4u(medium) 12u$(xsmall)">
 						<a href="{{.Permalink}}">
 							<span class="image fit">
