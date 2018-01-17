@@ -1,6 +1,9 @@
-+++
-#subtitle = ""
-#image = ""
-#raw = false
-draft=true
-+++
+---
+title: "{{ replace .TranslationBaseName "-" " " | title }}"     
+date: {{ .Date }}
+#subtitle: ""
+#image: ""
+#previewimage: ""
+#raw: false
+draft: true
+---

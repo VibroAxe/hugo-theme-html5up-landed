@@ -1,3 +1,87 @@
+
 {{ define "main" }}
-List page
+	{{ $classes := .Params.class | default "wrapper style1" }}
+	<div id="main" class="{{ $classes }}">
+		<div class="container">
+			<header class="major">
+				<h2>{{ .Title }}</h2>
+				{{if isset .Params "subtitle" }}
+				<p>{{.Params.subtitle}}</p>
+				{{end}}
+			</header>
+			 <!-- Content -->
+			 <section id="content">
+				 {{if isset .Params "image" }}
+				 <!--<a href="#" class="image fit"><img src="{{ $.Site.BaseURL }}{{ .Params.image }}" alt="{{ .Title }}"></a>-->
+				 {{ end }}
+				{{ .Content }}
+			</section>
+			<section id="list">
+				<div class="row center 50% uniform">
+					{{ range where .Data.Pages "Params.archived" "!=" true}}
+					<div class="4u 4u(medium) 12u$(xsmall)">
+						<a href="{{.Permalink}}">
+							<span class="image fit">
+								{{if isset .Params "previewimage"}}
+									<img class="preview-image" src="{{$.Site.BaseURL}}{{.Params.previewimage}}" />
+								{{else if isset .Params "image"}}
+									<img class="preview-image" src="{{$.Site.BaseURL}}{{.Params.image}}" />
+								{{else}}
+									{{ $preview := $.Site.Params.defaultsectionpreview | default "https://placeimg.com/640/480/any" }}
+									<img class="preview-image" src="{{$preview}}" />
+								{{end}}
+							</span>
+						</a>
+						{{if isset .Params "redirect"}}
+						<a href="{{.Params.redirect}}" class="button">
+						{{else}}
+						<a href="{{.Permalink}}" class="button">
+						{{end}}
+						{{.Title}} {{.Params.archived}}
+						</a>
+					</div>
+					{{ end }}
+				</div>
+				{{ $archiveposts := where .Data.Pages "Params.archived" "==" true}}
+				{{ $archivepostcount := len $archiveposts }}
+				{{ if gt $archivepostcount 0 }}
+				<header class="major"></header>
+				<header class="major">
+					{{if isset .Params "archivetitle" }}
+						<h2>{{ .Params.archivetitle }}</h2>
+					{{else}}
+						<h2>Archives</h2>
+					{{end}}
+				</header>
+				<div class="row center 50% uniform">
+					{{ range $archiveposts}}
+					<div class="4u 4u(medium) 12u$(xsmall)">
+						<a href="{{.Permalink}}">
+							<span class="image fit">
+								{{if isset .Params "previewimage"}}
+									<img class="preview-image" src="{{$.Site.BaseURL}}{{.Params.previewimage}}" />
+								{{else if isset .Params "image"}}
+									<img class="preview-image" src="{{$.Site.BaseURL}}{{.Params.image}}" />
+								{{else}}
+									{{ $preview := $.Site.Params.defaultsectionpreview | default "https://placeimg.com/640/480/any" }}
+									<img class="preview-image" src="{{$preview}}" />
+								{{end}}
+							</span>
+						</a>
+						{{if isset .Params "redirect"}}
+						<a href="{{.Params.redirect}}" class="button">
+						{{else}}
+						<a href="{{.Permalink}}" class="button">
+						{{end}}
+							{{.Title}}
+						</a>
+					</div>
+					{{ end }}
+				</div>
+				{{end}}
+			</section>
+		</div>
+	</div>
 {{ end }}
+
+
