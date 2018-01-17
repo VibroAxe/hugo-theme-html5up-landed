@@ -18,7 +18,24 @@
 			</section>
 			<section id="list">
 				<div class="row center 50% uniform">
-					{{ range $index, $element := where .Data.Pages "Params.archived" "!=" true}}
+					{{ $posts := where .Data.Pages "Params.archived" "!=" true}}
+					{{ $postcount := len $posts }}
+					{{ $finalrowcount := mod $postcount 3 }}
+					{{ $finalrowstart := sub $postcount $finalrowcount }}
+
+
+					{{ range $index, $element := $posts}}
+					{{if eq $index $finalrowstart }}
+						{{if eq $finalrowcount 1}}
+							<div class="4u 4u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{else if eq $finalrowcount 2}}
+							<div class="2u 2u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{end}}
+					{{end}}
 					<div class="4u 4u(medium) 12u$(xsmall)">
 						<a href="{{.Permalink}}">
 							<span class="image fit">
@@ -40,10 +57,23 @@
 						{{.Title}}
 						</a>
 					</div>
+					{{if eq $index $postcount }}
+						{{if eq $finalrowcount 1}}
+							<div class="4u 4u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{else if eq $finalrowcount 2}}
+							<div class="2u 2u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{end}}
+					{{end}}
 					{{ end }}
 				</div>
 				{{ $archiveposts := where .Data.Pages "Params.archived" "==" true}}
 				{{ $archivepostcount := len $archiveposts }}
+				{{ $archivefinalrowcount := mod $archivepostcount 3 }}
+				{{ $archivefinalrowstart := sub $archivepostcount $archivefinalrowcount }}
 				{{ if gt $archivepostcount 0 }}
 				<header class="major"></header>
 				<header class="major">
@@ -55,6 +85,17 @@
 				</header>
 				<div class="row center 50% uniform">
 					{{ range $index, $element := $archiveposts}}
+					{{if eq $index $archivefinalrowstart }}
+						{{if eq $archivefinalrowcount 1}}
+							<div class="4u 4u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{else if eq $archivefinalrowcount 2}}
+							<div class="2u 2u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{end}}
+					{{end}}
 					<div class="4u 4u(medium) 12u$(xsmall)">
 						<a href="{{.Permalink}}">
 							<span class="image fit">
@@ -76,6 +117,17 @@
 							{{.Title}}
 						</a>
 					</div>
+					{{if eq $index $archivepostcount }}
+						{{if eq $archivefinalrowcount 1}}
+							<div class="4u 4u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{else if eq $archivefinalrowcount 2}}
+							<div class="2u 2u(medium) 12u$(xsmall)">
+								&nbsp;
+							</div>
+						{{end}}
+					{{end}}
 					{{ end }}
 				</div>
 				{{end}}
