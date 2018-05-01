@@ -84,6 +84,30 @@
 			<script src="{{ .Site.BaseURL }}js/util.js"></script>
 			{{ `<!--[if lte IE 8]><script src="/js/ie/respond.min.js"></script><![endif]-->` | safeHTML }}
 			<script src="{{ .Site.BaseURL }}js/main.js"></script>
+			<script>
+			function resizeSections() {
+					$("section.spotlight").not(".bottom").each(function(index,element) { 
+						var jqel = $(element); 
+						var jqcontent = jqel.children("div.content"); 
+						jqcontent.css("height", "auto"); 
+						var contentHeight = jqcontent.height(); 
+						var contentPaddingTop = parseInt(jqcontent.css("padding-top"));
+						var contentPaddingBottom = parseInt(jqcontent.css("padding-bottom"));
+						jqcontent.css("height", "101%"); 
+						//console.log(contentHeight+contentPadding+contentPadding+"px"); 
+						jqel.css("min-height", contentHeight+contentPaddingTop+contentPaddingBottom+"px")
+					});
+					$("section.spotlight.bottom").each(function(index,element) { 
+						var jqel = $(element); 
+						var jqcontent = jqel.children("div.content"); 
+						var contentHeight = jqcontent.height(); 
+						var contentPaddingTop = parseInt(jqcontent.css("padding-top"));
+						var contentPaddingBottom = parseInt(jqcontent.css("padding-bottom"));
+						jqel.css("min-height", (contentHeight+contentPaddingTop+contentPaddingBottom)*1.4+"px") });
+			}
+			$(window).resize(resizeSections);
+			$(window).ready(resizeSections);
+			</script>
 		{{ template "_internal/google_analytics_async.html" . }}
 
 	</body>
